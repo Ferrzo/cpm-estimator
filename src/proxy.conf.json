@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+      "target": "https://api.developer.deutsche-boerse.com/prod/prisma-margin-estimator-2-0/2.0.0/",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+}
