@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+
+.content {
+  max-height: 90vh;
+  overflow: auto;
+
+  &-products {
+    flex: 1;
+  }
+  &-series {
+    flex: 3;
+  }
+}

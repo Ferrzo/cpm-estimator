@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IEstimatorRequest, IProductData, ISeriesData } from '../core/models';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  baseUrl = 'http://localhost:4200/';
   constructor(private httpClient: HttpClient) { }
 
-  getProducts(): Observable<any> {
-    return this.httpClient.get(`api/products`);
+  getProducts(): Observable<IProductData> {
+    return this.httpClient.get<IProductData>(`api/products`);
   }
 
-  getSeries(productId): Observable<any> {
-    return this.httpClient.get(`api/series?products=${productId}`);
+  getSeries(productId: string): Observable<ISeriesData> {
+    return this.httpClient.get<ISeriesData>(`api/series?products=${productId}`);
+  }
+
+  postEstimate(request: IEstimatorRequest): Observable<any> {
+    return this.httpClient.post<IEstimatorRequest>(`api/estimator`, request);
   }
 }

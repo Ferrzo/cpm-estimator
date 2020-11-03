@@ -10,16 +10,10 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let headers = req.headers
+    const headers = req.headers
       .set('X-DBP-APIKEY', environment.apiKey);
 
     const authReq = req.clone({ headers });
-    return next.handle(authReq).pipe(
-      tap(event => {
-        if (event instanceof HttpResponse) {
-          console.log(event);
-        }
-      })
-    );
+    return next.handle(authReq);
   }
 }
