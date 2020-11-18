@@ -1,6 +1,6 @@
 <h3>Product list</h3>
 <mat-selection-list [multiple]="false">
-  <mat-list-option *ngFor="let product of products" [value]="product" (click)="selectNewProduct(product)">
+  <mat-list-option *ngFor="let product of dataService.products$ | async" [value]="product" (click)="selectNewProduct(product)">
     {{product.product}}
   </mat-list-option>
 </mat-selection-list>

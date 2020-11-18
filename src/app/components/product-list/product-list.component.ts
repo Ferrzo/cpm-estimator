@@ -15,15 +15,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   private ngDestroy$ = new Subject();
 
-  constructor(private dataService: DataService) { }
+  constructor(public dataService: DataService) { }
 
   public ngOnInit(): void {
     this.dataService.fetchProducts();
-    this.dataService.getProducts()
-      .pipe(
-        takeUntil(this.ngDestroy$),
-      )
-      .subscribe(data => this.products = data?.products);
   }
 
   public ngOnDestroy(): void {
