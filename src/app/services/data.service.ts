@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { IEstimatorPortfolio, IEstimatorRequest, IEtdPortfolio, IProductData, ISeries, ISeriesData } from '../core/models';
+import { IEstimatorPortfolio, IEstimatorRequest, IEtdPortfolio, IProduct, IProductData, ISeries, ISeriesData } from '../core/models';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private products$: BehaviorSubject<IProductData> = new BehaviorSubject<IProductData>(null);
+  public products$: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>([]);
   private series$: BehaviorSubject<ISeriesData> = new BehaviorSubject<ISeriesData>(null);
 
   constructor(private apiService: ApiService) { }
-
-  public getProducts(): Observable<IProductData> {
-    return this.products$.asObservable();
-  }
 
   public getSeries(): Observable<ISeriesData> {
     return this.series$.asObservable();
@@ -23,7 +19,7 @@ export class DataService {
 
   public fetchProducts(): void {
     this.apiService.getProducts().pipe(take(1))
-      .subscribe(data => this.products$.next(data));
+      .subscribe(data => this.products$.next(data.products));
   }
 
   public fetchSeries(productId: string): void {
@@ -37,7 +33,7 @@ export class DataService {
       etd_portfolio: this.getPortfolioModel(series)
     };
     const request: IEstimatorRequest = {
-     portfolio_components: components
+     portfolio_components: [components]
     };
 
     return this.apiService.postEstimate(request);

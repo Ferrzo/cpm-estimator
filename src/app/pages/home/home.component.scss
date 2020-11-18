@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  max-height: 90vh;
 }
 
 .content {
@@ -8,8 +9,10 @@
 
   &-products {
     flex: 1;
+    overflow: auto;
   }
   &-series {
+    overflow: auto;
     flex: 3;
   }
 }

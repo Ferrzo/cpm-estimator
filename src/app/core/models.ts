@@ -28,7 +28,7 @@ export interface ISeries {
 }
 
 export interface IEstimatorRequest {
-  portfolio_components: IEstimatorPortfolio;
+  portfolio_components: IEstimatorPortfolio[];
 }
 
 export interface IEstimatorPortfolio {
